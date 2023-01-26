@@ -18,7 +18,7 @@ ChatLogic::ChatLogic()
     ////
 
     // create instance of chatbot
-    _chatBot = new ChatBot("../images/chatbot.png");
+    //_chatBot = new ChatBot("../images/chatbot.png");
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
     _chatBot->SetChatLogicHandle(this);
@@ -33,7 +33,7 @@ ChatLogic::~ChatLogic()
     ////
 
     // delete chatbot instance
-    delete _chatBot;
+    //delete _chatBot;
 
     /*
     // delete all nodes
@@ -133,7 +133,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         // create new element if ID does not yet exist
                         if (newNode == _nodes.end())
                         {
-                            _nodes.emplace_back(new GraphNode(id));
+                            //std::unique_ptr<GraphNode> freshNode = std::make_unique<GraphNode>(GraphNode(id));
+                            _nodes.push_back(std::unique_ptr<GraphNode>(new GraphNode(id)));
                             newNode = _nodes.end() - 1; // get iterator to last element
 
                             // add all answers to current node
@@ -217,8 +218,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    ChatBot chatbot = ChatBot("../images/chatbot.png");
+    _chatBot = &chatbot;
+    chatbot.SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(chatbot);
 
     ////
     //// EOF STUDENT CODE
