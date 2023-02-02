@@ -33,7 +33,11 @@ ChatLogic::~ChatLogic()
     ////
 
     // delete chatbot instance
+<<<<<<< HEAD
     _chatBot = nullptr;
+=======
+    //delete _chatBot;
+>>>>>>> 4ba32ed78a6be95a23e947090c28f2d94f2c4b62
 
     /*
     // delete all nodes

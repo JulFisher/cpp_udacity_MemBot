@@ -48,7 +48,6 @@ public:
             _rootNode = source._rootNode;
             _chatLogic = source._chatLogic;
 
-
             return *this;
     }
 
@@ -69,7 +68,6 @@ public:
         source._currentNode = nullptr;
         source._rootNode = nullptr;
         source._chatLogic = nullptr;
-
 
         return *this;
     }
