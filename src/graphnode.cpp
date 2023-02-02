@@ -11,7 +11,7 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot;
+    //delete _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -34,17 +34,18 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 
 //// STUDENT CODE
 ////
-void GraphNode::MoveChatbotHere(ChatBot chatbot)
+void GraphNode::MoveChatbotHere(ChatBot &&chatbot, ChatLogic *chatlogic)
 {
-
-    _chatBot = new ChatBot(chatbot);
-    _chatBot->SetCurrentNode(this);
+    _chatBot = ChatBot(std::move(chatbot));
+    _chatLogic = chatlogic;
+    _chatLogic->SetChatbotHandle(&_chatBot);
+    _chatBot.SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(*_chatBot);
-    _chatBot = nullptr; // invalidate pointer at source
+    newNode->MoveChatbotHere(std::move(_chatBot), _chatLogic);
+    //_chatBot = nullptr; // invalidate pointer at source
 }
 ////
 //// EOF STUDENT CODE
