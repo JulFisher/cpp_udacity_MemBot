@@ -33,7 +33,7 @@ ChatLogic::~ChatLogic()
     ////
 
     // delete chatbot instance
-    //delete _chatBot;
+    _chatBot = nullptr;
 
     /*
     // delete all nodes
@@ -221,7 +221,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     this->SetChatbotHandle(&chatbot);
     chatbot.SetChatLogicHandle(this);
     chatbot.SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(std::move(chatbot));
+    rootNode->MoveChatbotHere(std::move(chatbot), this);
 
     ////
     //// EOF STUDENT CODE
